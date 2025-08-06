@@ -1,12 +1,16 @@
 import csv
 import random
-
-listOfMovies = []
+import tkinter
+from tkinter.filedialog import askopenfilename
 
 # Adding a 'main' method
 def main():
+    listOfMovies = []
 
-    with open("watchlist-witht33th-2024-12-31-02-25-utc.csv", 'r') as csv_file:
+    # Using the imported 
+    watchlist = askopenfilename()
+
+    with open(watchlist, 'r') as csv_file:
         csvReader = csv.DictReader(csv_file, delimiter = ',')   #using DictReader to clearly state what fieldname from the csv is being used
         next(csvReader) #skipping the header
 
