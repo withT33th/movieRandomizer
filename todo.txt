@@ -1,0 +1,11 @@
+This a list of features to implement/steps to accomplish a given feature
+
+Feature that allows saving the contents of the uploaded file so that way it can be used through multiple executions. Also allows for users to select whether or not the want to upload a new list or randomize their already existing list.
+
+- If user wants to select a new file or for the first time (no contents saved)
+    - Allow the user to select their movie watchlist from file explorer
+        - Save contents of the movie watchlist to the project folder
+            - Replace existing contents if needed
+        - Execute the randomization with the saved contents
+- If user want to rerun
+    - Simply execute randomization

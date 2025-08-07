@@ -7,7 +7,7 @@ from tkinter.filedialog import askopenfilename
 def main():
     listOfMovies = []
 
-    # Using the imported 
+    # Using the imported tkinter modules, we prompt the user to upload their movie watchlist from their file explorer
     watchlist = askopenfilename()
 
     with open(watchlist, 'r') as csv_file:
