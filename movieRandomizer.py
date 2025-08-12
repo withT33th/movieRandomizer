@@ -11,12 +11,13 @@ def save_to_pickle(list):
 
 def load_pickle():
     with open('list.pkl', 'rb') as file:
-        l = pickle.load(file)
-    return l
+        li = pickle.load(file)
+    return li
 
-#defining a method to generate a list of movie titles from a csv file and saving it to a pickle file
+# method to generate a list from the csv provided and save it using pickle
 def generate_list(watchlist_file):
     gen_list = []
+
     with open(watchlist_file, 'r') as csv_file:
         csvReader = csv.DictReader(csv_file, delimiter = ',')   #using DictReader to clearly state what fieldname from the csv is being used
         next(csvReader) #skipping the header
@@ -33,19 +34,32 @@ def generate_list(watchlist_file):
 def get_random_movie(movielist):
     return random.choice(movielist)
 
-
 # Adding a 'main' method
 def main():
+    # While-loop to ensure user input is a valid option
+    y = True
+    while (y == True):
+        # Asking the user if they would like to upload a new csv file or use an existing one
+        choice = input('Would you like to upload a new file (1) or use an existing one (2)?: ')
+        try:
+            choice = float(choice)
+            y = False
+        except:
+            print("Please enter a valid number.")
 
-    # Asking the user if they would like to upload a new csv file or use an existing one
-    choice = input('Would you like to upload a new file (1) or use an existing one (2)?: ')
-    if(choice == '1'): 
+    if(choice == 1):
+        # Initializing and hiding a tkinter root window
+        root = tkinter.Tk()
+
         # Using the imported tkinter modules, we prompt the user to upload their movie watchlist from their file explorer
         watchlist_file = askopenfilename()
         watchlist = generate_list(watchlist_file)
         print(get_random_movie(watchlist))
 
-
+    elif(choice == 2):
+        # in this choice, we load the existing saved data instead of opening the file explorer
+        watchlist = load_pickle()
+        print(get_random_movie(watchlist))
 
 if __name__ == "__main__":
     main()
