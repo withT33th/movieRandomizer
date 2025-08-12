@@ -36,6 +36,10 @@ def get_random_movie(movielist):
 
 # Adding a 'main' method
 def main():
+    # Initializing root window
+    root = tkinter.Tk()
+    root.withdraw()
+
     # While-loop to ensure user input is a valid option
     y = True
     while (y == True):
@@ -48,11 +52,11 @@ def main():
             print("Please enter a valid number.")
 
     if(choice == 1):
-        # Initializing and hiding a tkinter root window
-        root = tkinter.Tk()
-
         # Using the imported tkinter modules, we prompt the user to upload their movie watchlist from their file explorer
+        root.attributes('-topmost', True)
         watchlist_file = askopenfilename()
+        root.attributes('-topmost', False)
+
         watchlist = generate_list(watchlist_file)
         print(get_random_movie(watchlist))
 
