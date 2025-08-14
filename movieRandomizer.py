@@ -41,29 +41,38 @@ def main():
     root.withdraw()
 
     # While-loop to ensure user input is a valid option
-    y = True
-    while (y == True):
+    y = False
+    while (y == False):
         # Asking the user if they would like to upload a new csv file or use an existing one
-        choice = input('Would you like to upload a new file (1) or use an existing one (2)?: ')
+        choice = input('\nWould you like to upload a new file (1) or use an existing one (2)?: ')
         try:
             choice = float(choice)
-            y = False
+            y = True
         except:
-            print("Please enter a valid number.")
+            print("\nPlease enter a valid number.")
 
-    if(choice == 1):
-        # Using the imported tkinter modules, we prompt the user to upload their movie watchlist from their file explorer
-        root.attributes('-topmost', True)
-        watchlist_file = askopenfilename()
-        root.attributes('-topmost', False)
+    x = False
+    while(x == False):
+        if(choice == 1):
+             # Using the imported tkinter modules, we prompt the user to upload their movie watchlist from their file explorer
+            root.attributes('-topmost', True)
+            watchlist_file = askopenfilename()
+            root.attributes('-topmost', False)
 
-        watchlist = generate_list(watchlist_file)
-        print(get_random_movie(watchlist))
+            watchlist = generate_list(watchlist_file)
+            print(get_random_movie(watchlist))
+            x = True
 
-    elif(choice == 2):
-        # in this choice, we load the existing saved data instead of opening the file explorer
-        watchlist = load_pickle()
-        print(get_random_movie(watchlist))
+        elif(choice == 2):
+            try:
+                # in this choice, we load the existing saved data instead of opening the file explorer
+                watchlist = load_pickle()
+                print(get_random_movie(watchlist))
+                x = True
+            except:
+                print("\nNo file available.\n")
+                print("Generating new watchlist.\n")
+                choice = 1
 
 if __name__ == "__main__":
     main()
