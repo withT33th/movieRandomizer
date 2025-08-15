@@ -1,3 +1,4 @@
+import sys
 import csv
 import random
 import tkinter
@@ -45,23 +46,32 @@ def main():
     while (y == False):
         # Asking the user if they would like to upload a new csv file or use an existing one
         choice = input('\nWould you like to upload a new file (1) or use an existing one (2)?: ')
+
+        # Try/except block to evaluate if a user has input a valid choice
         try:
             choice = float(choice)
-            y = True
+            if (choice == 1 or choice == 2):
+                y = True
+            else:
+                print("\nPlease enter a valid number.")
         except:
             print("\nPlease enter a valid number.")
 
     x = False
     while(x == False):
         if(choice == 1):
-             # Using the imported tkinter modules, we prompt the user to upload their movie watchlist from their file explorer
+            # Using the imported tkinter modules, we prompt the user to upload their movie watchlist from their file explorer
             root.attributes('-topmost', True)
-            watchlist_file = askopenfilename()
+            watchlist_file = askopenfilename(filetypes = (("CSV Files", "*.csv"),))
             root.attributes('-topmost', False)
 
-            watchlist = generate_list(watchlist_file)
-            print(get_random_movie(watchlist))
-            x = True
+            # Try/except block for if a user exits the dialog box and does not choose a file
+            try:
+                watchlist = generate_list(watchlist_file)
+                print(get_random_movie(watchlist))
+                x = True
+            except:
+                sys.exit('No file chosen. Goodbye!\n')
 
         elif(choice == 2):
             try:
@@ -70,8 +80,8 @@ def main():
                 print(get_random_movie(watchlist))
                 x = True
             except:
-                print("\nNo file available.\n")
-                print("Generating new watchlist.\n")
+                print("\nNo file available.")
+                print("Generating new watchlist...\n")
                 choice = 1
 
 if __name__ == "__main__":
