@@ -57,10 +57,11 @@ def main():
         except:
             print("\nPlease enter a valid number.")
 
+    # While loop for flow control, to generate a pickle from a chosen csv file or use an existing one
     x = False
     while(x == False):
         if(choice == 1):
-            # Using the imported tkinter modules, we prompt the user to upload their movie watchlist from their file explorer
+            # Using the imported tkinter modules, we prompt the user to upload their movie watchlist csv file from their file explorer
             root.attributes('-topmost', True)
             watchlist_file = askopenfilename(filetypes = (("CSV Files", "*.csv"),))
             root.attributes('-topmost', False)
@@ -80,6 +81,7 @@ def main():
                 print(get_random_movie(watchlist))
                 x = True
             except:
+                # If a user chooses to use an existing pickle, but there is not one, then the user will be sent back to choose a brand new file
                 print("\nNo file available.")
                 print("Generating new watchlist...\n")
                 choice = 1
